@@ -54,5 +54,5 @@ To Delete the ScriptLink from the site.
 
 ## Reference 
 Please also see the SharePoint Forum below.
+https://social.msdn.microsoft.com/Forums/ja-JP/44644a7d-cc33-44f3-9f89-df568e4621db/sharepoint-online-12391125101247312479?forum=sharepointsupportteamja
 
-TBD
