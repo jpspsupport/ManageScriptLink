@@ -20,6 +20,8 @@ https://www.nuget.org/packages/Microsoft.SharePointOnline.CSOM
 
 ## How to Run - parameters
 
+### ManageScriptLink.ps1
+
 -siteUrl ... Target site (web) URL.
 
 -type ... View / AddOrUpdate / Delete
@@ -51,6 +53,65 @@ To Insert the ScriptLink into the site.
 To Delete the ScriptLink from the site.
 
 .\ManageScriptLink.ps1 -siteUrl https://tenant.sharepoint.com/sites/site -type Delete -codetitle NewScript
+
+### GetScriptLink.ps1
+
+-siteUrl ... Target site (web) URL.
+
+-username ... [optional]Site Administrator Account to Manage ScriptLink.
+
+-password ... [optional]The password of the above user.
+
+See examples below.
+
+
+#### Example 
+To View the ScriptLink registered in the site.
+
+.\GetScriptLink.ps1 -siteUrl https://tenant.sharepoint.com/sites/site 
+
+### SetScriptLink.ps1
+
+-siteUrl ... Target site (web) URL.
+
+-Title ... [required] ScriptLink CustomAction Title to Add.
+
+-ScriptBlockFile ... [required] ScriptBlock Content to be added.
+
+-Sequence ... [optional] The sequence number of the ScriptLink. Default Value is 10.
+
+-username ... [optional]Site Administrator Account to Manage ScriptLink.
+
+-password ... [optional]The password of the above user.
+
+See examples below.
+
+
+#### Example 
+To Insert the ScriptLink into the site.
+
+.\SetScriptLink.ps1 -siteUrl https://tenant.sharepoint.com/sites/site -Title NewScript -ScriptBlockFile .\sample.js
+
+
+### RemoveScriptLink.ps1
+
+-siteUrl ... Target site (web) URL.
+
+-Title ... [required] ScriptLink CustomAction Title to delete.
+
+-username ... [optional]Site Administrator Account to Manage ScriptLink.
+
+-password ... [optional]The password of the above user.
+
+See examples below.
+
+
+#### Example 
+To delete the ScriptLink from the site.
+
+.\RemoveScriptLink.ps1 -siteUrl https://tenant.sharepoint.com/sites/site -Title NewScript 
+
+
 
 ## Reference 
 Please also see the SharePoint Forum below.
