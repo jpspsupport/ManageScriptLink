@@ -70,11 +70,11 @@ if (!$updated)
 {
     $action1 = $actions.Add()
     $action1.Location = "ScriptLink"
-    $action1.Title = $codeTitle
-    $action1.Sequence = $codesequence
-    $action1.ScriptBlock = (Get-Content $codetoadd -Raw)
+    $action1.Title = $Title
+    $action1.Sequence = $Sequence
+    $action1.ScriptBlock = (Get-Content $ScriptBlockFile -Raw)
     $action1.Update()
     $script:context.ExecuteQuery()
-    Write-Host ("ScriptLink " + $codeTitle + " is added.")
+    Write-Host ("ScriptLink " + $Title + " is added.")
 }
 
