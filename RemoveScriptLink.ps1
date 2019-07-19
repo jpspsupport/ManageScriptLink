@@ -18,27 +18,48 @@ param(
     [Parameter(Mandatory=$true)]
     $siteUrl,
     [Parameter(Mandatory=$false)]
-    [ValidateSet("View","AddorUpdate","Delete")]
-    $type = "View",
-    [Parameter(Mandatory=$false)]
-    $codetitle,
-    [Parameter(Mandatory=$false)]
-    $codetoadd,
-    [Parameter(Mandatory=$false)]
-    $codesequence = 10,
+    $Title,
     $username,
     $password
 )
 
-switch ($type.ToLower()) {
-    "addorupdate" { 
-        .\SetScriptLink.ps1 -siteUrl $siteUrl -Title $codetitle -ScriptBlockFile $codetoadd -Sequence $codesequence -username $username -password $password
-     }
-     "delete" {
-         .\RemoveScriptLink.ps1 -siteUrl $siteUrl -Title $codetitle -username $username -password $password
-     }
-    Default {
-        .\GetScriptLink.ps1 -siteUrl $siteUrl -username $username -password $password
-    }
+[void][System.Reflection.Assembly]::LoadWithPartialName("Microsoft.SharePoint.Client")
+[void][System.Reflection.Assembly]::LoadWithPartialName("Microsoft.SharePoint.Client.Runtime")
+
+if ($username -eq $null)
+{
+    $Cred = Get-Credential
+    $username = $Cred.UserName
+    $securepwd = $Cred.Password
+}
+else {
+    $securepwd = ConvertTo-SecureString $password -AsPlainText -Force
 }
 
+$script:context = New-Object Microsoft.SharePoint.Client.ClientContext($siteUrl)
+$spocred = New-Object Microsoft.SharePoint.Client.SharePointOnlineCredentials($username, $securepwd)
+$script:context.Credentials = $spocred
+
+$web = $script:context.Web
+$actions = $web.UserCustomActions
+$script:context.Load($web)
+
+do
+{
+    $script:context.Load($actions)
+    $script:context.ExecuteQuery()
+    $deleted = $false
+
+    foreach ($action in $actions)
+    {
+        if ((($action.Location -eq "ScriptLink")) -and ($action.Title -eq $Title))
+        {
+            $action.DeleteObject()
+            $script:context.ExecuteQuery()
+            Write-Host ("ScriptLink " + $Title + " is deleted.")
+            $deleted = $true
+            break
+        }
+    }
+}
+while ($deleted)
