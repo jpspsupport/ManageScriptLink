@@ -19,8 +19,13 @@ https://www.nuget.org/packages/Microsoft.SharePointOnline.CSOM
 5. place them in the specified directory from the code. 
 
 ## How to Run - parameters
+This sample script is made up of 4 scripts.
+1. ManageScriptLink.ps1 ... Invoking the child scripts from the top.
+2. GetScriptLink.ps1 ... Enumerating the ScriptLinks.
+3. SetScriptLink.ps1 ... Setting (Adding or Updating) the ScriptLinks.
+4. RemoveScriptLink.ps1 ... Deleting the specified ScriptLinks.
 
-### ManageScriptLink.ps1
+### 1. ManageScriptLink.ps1
 
 -siteUrl ... Target site (web) URL.
 
@@ -54,7 +59,7 @@ To Delete the ScriptLink from the site.
 
 .\ManageScriptLink.ps1 -siteUrl https://tenant.sharepoint.com/sites/site -type Delete -codetitle NewScript
 
-### GetScriptLink.ps1
+### 2. GetScriptLink.ps1
 
 -siteUrl ... Target site (web) URL.
 
@@ -70,7 +75,7 @@ To View the ScriptLink registered in the site.
 
 .\GetScriptLink.ps1 -siteUrl https://tenant.sharepoint.com/sites/site 
 
-### SetScriptLink.ps1
+### 3. SetScriptLink.ps1
 
 -siteUrl ... Target site (web) URL.
 
@@ -93,7 +98,7 @@ To Insert the ScriptLink into the site.
 .\SetScriptLink.ps1 -siteUrl https://tenant.sharepoint.com/sites/site -Title NewScript -ScriptBlockFile .\sample.js
 
 
-### RemoveScriptLink.ps1
+### 4. RemoveScriptLink.ps1
 
 -siteUrl ... Target site (web) URL.
 
